@@ -35,6 +35,8 @@ public class RouteRestController extends RestController {
      * Add route string.
      *
      * @param route the route
+     * @param ip ip of route
+     * @param port port
      * @return the string
      */
     public String addRoute(Route route, String ip, Integer port) {
@@ -46,6 +48,8 @@ public class RouteRestController extends RestController {
      * Delete route string.
      *
      * @param route the route
+     * @param ip the ip
+     * @param port the port
      * @return the string
      */
     public String deleteRoute(Route route, String ip, Integer port) {
@@ -56,6 +60,8 @@ public class RouteRestController extends RestController {
     /**
      * Gets routers.
      *
+     * @param ip the ip
+     * @param port the port
      * @return the routers
      */
     public List<Route> getRoutes(String ip, Integer port) {
@@ -74,6 +80,8 @@ public class RouteRestController extends RestController {
      * Add default gw string.
      *
      * @param defaultGW the default gw
+     * @param ip the ip
+     * @param port the port
      * @return the string
      */
     public String addDefaultGW(Route defaultGW, String ip, Integer port) {
@@ -85,6 +93,8 @@ public class RouteRestController extends RestController {
      * Del default gw string.
      *
      * @param defaultGW the default gw
+     * @param ip the ip
+     * @param port the port
      * @return the string
      */
     public String delDefaultGW(Route defaultGW, String ip, Integer port) {
@@ -92,6 +102,12 @@ public class RouteRestController extends RestController {
         return executeHttpRequest(path, "DELETE", ip, port);
     }
 
+    /**
+     * Remove default gateway
+     * @param ip ip of container
+     * @param port control port of container
+     * @return result of executed action
+     */
     public String delDefaultGw(String ip, Integer port) {
         String path = "/iproutes/default";
         return executeHttpRequest(path, "DELETE", ip, port);
@@ -102,6 +118,8 @@ public class RouteRestController extends RestController {
     /**
      * Gets interfaces.
      *
+     * @param ip the ip
+     * @param port the port
      * @return the interfaces
      */
     public List<NetworkInterface> getInterfaces(String ip, Integer port) {

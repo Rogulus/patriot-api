@@ -14,25 +14,18 @@
  *    limitations under the License.
  */
 
-package io.patriot_framework.network.simulator.api.model.devices.router;
+package io.patriot_framework.junit.extensions;
 
-import io.patriot_framework.network.simulator.api.model.devices.Device;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import java.util.List;
-
-public interface Router extends Device {
-    /**
-     * Returns physical network interfaces of router.
-     * @return list of connected interfaces
-     */
-    List<NetworkInterface> getInterfaces();
-    void setNetworkInterfaces(List<NetworkInterface> networkInterfaces);
-
-
-    /**
-     * Returns if this router is last step to internet in current LAN.
-     * @return true if router is on border, false otherwise
-     */
-    Boolean isCorner();
-
+/**
+ * Annotation represents test class, that ultimately
+ * stops test execution on any failure in its testing methods.
+ */
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface StopTestExecution {
 }

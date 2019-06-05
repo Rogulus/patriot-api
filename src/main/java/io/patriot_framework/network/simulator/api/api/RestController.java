@@ -32,6 +32,8 @@ public abstract class RestController {
      *
      * @param path   the path
      * @param method the method
+     * @param ip the ip
+     * @param port port
      * @return the string
      */
     public String executeHttpRequest(String path, String method, String ip, Integer port) {

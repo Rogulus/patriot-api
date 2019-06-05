@@ -26,7 +26,7 @@ import io.patriot_framework.hub.PropertiesNotLoadedException;
  */
 public abstract class PatriotSetupExtension extends SetupExtension {
 
-   private PatriotHub hub;
+    private PatriotHub hub;
 
     public PatriotSetupExtension() throws PropertiesNotLoadedException {
         hub = PatriotHub.getInstance();
@@ -34,6 +34,7 @@ public abstract class PatriotSetupExtension extends SetupExtension {
 
     /**
      * Accessor for implementation subclasses
+     *
      * @return PatriotHub instance
      */
     protected PatriotHub getHub() {

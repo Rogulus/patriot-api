@@ -29,6 +29,8 @@ public class IPTablesRestController extends RestController {
      * Add filter rule string.
      *
      * @param filterRule the filter rule
+     * @param ip the ip
+     * @param port the port
      * @return the string
      **/
     public String addFilterRule(FilterRule filterRule, String ip, Integer port) {
@@ -40,6 +42,8 @@ public class IPTablesRestController extends RestController {
      * Delete filter rule string.
      *
      * @param filterRule the filter rule
+     * @param ip the ip
+     * @param port the port
      * @return the string
      **/
     public String deleteFilterRule(FilterRule filterRule, String ip, Integer port) {
@@ -51,6 +55,8 @@ public class IPTablesRestController extends RestController {
      * Add chain string.
      *
      * @param chain the chain
+     * @param ip the ip
+     * @param port the port
      * @return the string
      **/
     public String addChain(Chain chain, String ip, Integer port) {
@@ -61,6 +67,8 @@ public class IPTablesRestController extends RestController {
      * Delete chain string.
      *
      * @param chain the chain
+     * @param ip the ip
+     * @param port the port
      * @return the string
      **/
     public String deleteChain(Chain chain, String ip, Integer port) {
@@ -71,6 +79,8 @@ public class IPTablesRestController extends RestController {
     /**
      * Save ip tables string.
      *
+     * @param ip the ip
+     * @param port the port
      * @return the string
      **/
     public String saveIpTables(String ip, Integer port) {

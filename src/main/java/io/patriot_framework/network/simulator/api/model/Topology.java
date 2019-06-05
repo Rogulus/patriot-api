@@ -116,8 +116,8 @@ public class Topology {
 
     /**
      * Finds router in list by name.
-     * @param name
-     * @return
+     * @param name name of router
+     * @return router object
      */
     public Router findRouterByName(String name) {
         for (Router r : routers) {

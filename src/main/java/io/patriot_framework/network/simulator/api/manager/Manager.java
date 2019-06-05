@@ -50,32 +50,65 @@ public class Manager {
     private int monitoringPort = 0;
     private HashMap<String, ArrayList<Route>> processedRoutes = new HashMap<>();
 
+    /**
+     * Constructor
+     * @param routerTag tag of router to be used
+     */
     public Manager(String routerTag) {
         this.routerTag = routerTag;
     }
 
+    /**
+     * Getter for monitoring address
+     * @return address of monitoring component
+     */
     public String getMonitoringAddr() {
         return monitoringAddr;
     }
 
+    /**
+     * Setter for monitoring address
+     * @param monitoringAddr Address of monitoring service (greylog)
+     * @param monitoringPort port of monitoring service
+     */
     public void setMonitoring(String monitoringAddr, int monitoringPort) {
         this.monitoringAddr = monitoringAddr;
         this.monitoringPort = monitoringPort;
     }
 
+    /**
+     * Constructor
+     * @param controllers to be used
+     */
     public Manager(List<Controller> controllers) {
         this.controllers = controllers;
     }
 
+    /**
+     * Constructor
+     * @param controllers to be used
+     * @param routerTag tag of the router
+     */
     public Manager(List<Controller> controllers, String routerTag) {
         this.controllers = controllers;
         this.routerTag = routerTag;
     }
 
+    /**
+     * Setter for controllers
+     * @param controllers controllers to be used by manager
+     */
     public void setControllers(List<Controller> controllers) {
         this.controllers = controllers;
     }
 
+    /**
+     * Constructor
+     * @param controllers controllers used by manager
+     * @param routerTag tag of router image
+     * @param monitoringAddr ip address of monitoring service
+     * @param monitoringPort port of monitoring service
+     */
     public Manager(List<Controller> controllers, String routerTag, String monitoringAddr, int monitoringPort) {
         this.controllers = controllers;
         this.monitoringAddr = monitoringAddr;
@@ -83,6 +116,10 @@ public class Manager {
         this.monitoringPort = monitoringPort;
     }
 
+    /**
+     * Getter for processed routes
+     * @return refined routes after application of rules
+     */
     public HashMap<String, ArrayList<Route>> getProcessedRoutes() {
         return processedRoutes;
     }
@@ -105,7 +142,7 @@ public class Manager {
 
     /**
      * Calculates routers via Floyd-Warshall algo.
-     * @param topology
+     * @param topology the representation of topology where shortest paths are to be found
      */
     public void calcRoutes(Topology topology) {
         ArrayList<TopologyNetwork> topologyNetworks = topology.getNetworks();
@@ -143,8 +180,7 @@ public class Manager {
 
     /**
      * Parses calculated routes to actual route objects.
-     * @param topology
-     * @return HashMap with routers name as key and routes which has to be set to routers routing table.
+     * @param topology topology of network
      */
     public void processRoutes(Topology topology) {
         LOGGER.info("Processing routes to ipRoute2 format.");
@@ -263,7 +299,7 @@ public class Manager {
 
     /**
      Sets routes to routing table via REST API on targeted routers.
-     * @param topology
+     * @param topology topology of network
      */
     public void setRoutes(Topology topology) {
         RouteRestController routeController = new RouteRestController();
@@ -288,7 +324,7 @@ public class Manager {
     /**
      * Method updates interfaces of routers. Usually have to be called after
      * routers are connected to networks.
-     * @param topology
+     * @param topology topology of network
      */
     private void updateRouters(Topology topology) {
         RouteRestController restController = new RouteRestController();
@@ -322,7 +358,7 @@ public class Manager {
 
     /**
      * Initializes ip address last hop in current LAN.
-     * @param topology
+     * @param topology topology of network
      */
     private void initializeCornerNetworkIP(Topology topology) {
         for (TopologyNetwork n : topology.getNetworks()) {
@@ -338,8 +374,8 @@ public class Manager {
 
     /**
      * Returns device with created by target creator.
-     * @param topology
-     * @param creator
+     * @param topology topology of network
+     * @param creator creating object
      * @return
      */
     private Device findDeviceWithCreator(Topology topology, String creator) {
@@ -484,7 +520,7 @@ public class Manager {
     /**
      * Sets masquerade to iptables on corner router, which provides full
      * connectivity to internet for all networks communicating with corner router.
-     * @param topology
+     * @param topology topology of network
      */
     public void setMasquerade(Topology topology) {
         for (Router r : topology.getRouters()) {
@@ -501,10 +537,10 @@ public class Manager {
 
     /**
      * Stops device, connects device to target network and again start device.
-     * @param device
-     * @param network
-     * @param calculatedTopology
-     * @param tag
+     * @param device device to be connected
+     * @param network network where device will be connected
+     * @param calculatedTopology the topology which of network
+     * @param tag tag of device
      */
     public void deployDeviceToNetwork(Device device, TopologyNetwork network, Topology calculatedTopology, String tag) {
         ArrayList<TopologyNetwork> networks = calculatedTopology.getNetworks();

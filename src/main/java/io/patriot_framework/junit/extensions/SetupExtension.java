@@ -40,12 +40,14 @@ public abstract class SetupExtension implements BeforeAllCallback, CloseableReso
 
     /**
      * Abstract method to obtain unique identifier of the extension
+     *
      * @return unique identifier
      */
     protected abstract UUID getUUID();
 
     /**
      * Abstract method to signal Extension framework that setup method already run
+     *
      * @return true if setup method was invoked
      */
     protected abstract boolean isSetUp();

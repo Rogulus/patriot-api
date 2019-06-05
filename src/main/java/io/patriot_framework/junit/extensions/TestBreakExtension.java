@@ -16,19 +16,19 @@
 
 package io.patriot_framework.junit.extensions;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.junit.jupiter.api.extension.ConditionEvaluationResult;
+import org.junit.jupiter.api.extension.ExecutionCondition;
+import org.junit.jupiter.api.extension.ExtensionContext;
 
 /**
- * Annotation represents test class that should be not started,
- * when given test did fail.
+ * Extension to allow break of testing whenever class
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface DisableByState {
-    Class value();
-
-    TestResultState requiredState() default TestResultState.FAILED;
+public class TestBreakExtension implements ExecutionCondition {
+    @Override
+    public ConditionEvaluationResult evaluateExecutionCondition(ExtensionContext extensionContext) {
+        if (TestResultRegistry.stoppedExecution()) {
+            return ConditionEvaluationResult.disabled("Execution of tests was stopped by " + TestResultRegistry.getBreakingClass().toString());
+        }
+        return ConditionEvaluationResult.enabled(null);
+    }
 }

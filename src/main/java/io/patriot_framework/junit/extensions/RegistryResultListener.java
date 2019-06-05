@@ -49,7 +49,9 @@ public class RegistryResultListener implements TestWatcher {
     @Override
     public void testFailed(ExtensionContext extensionContext, Throwable throwable) {
         Class c = extensionContext.getRequiredTestClass();
+        if (c.isAnnotationPresent(StopTestExecution.class)) {
+            TestResultRegistry.setBreakPoint(c);
+        }
         TestResultRegistry.putState(c, TestResultState.FAILED);
-
     }
 }

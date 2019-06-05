@@ -27,6 +27,9 @@ public class MonitoringRestController extends RestController {
     /**
      * Sets monitoring address to associated router
      * @param elasticAddr address of elastic search to be used with PatrIoT
+     * @param elasticPort port of elastic search
+     * @param ip the ip
+     * @param port the port
      * @return response from router
      */
     public String setMonitoringAddress(String elasticAddr, Integer elasticPort, String ip, Integer port)

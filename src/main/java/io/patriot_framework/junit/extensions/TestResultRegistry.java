@@ -27,9 +27,12 @@ import java.util.Map;
  */
 class TestResultRegistry {
     private static Map<Class, TestResultState> results = new HashMap<>();
+    private static boolean stopExecution = false;
+    private static Class breakingClass;
 
     /**
      * Checks which what is recorded state for Test Class
+     *
      * @param c Test Class to be checked
      * @return state of test class
      */
@@ -39,16 +42,17 @@ class TestResultRegistry {
 
     /**
      * Method to store or update current state of Test Class
-     *
+     * <p>
      * Method evaluates cases in order SUCCESS, ABORTED, DISABLED, FAILED
      * where the last has the highest priority.
-     * @param c class to be associated with test result
+     *
+     * @param c  class to be associated with test result
      * @param st state of Test class
      */
     public static void putState(Class c, TestResultState st) {
         if (results.containsKey(c)) {
             TestResultState oldState = results.get(c);
-            switch(oldState) {
+            switch (oldState) {
                 case SUCCESS:
                     results.put(c, st);
                     return;
@@ -62,5 +66,33 @@ class TestResultRegistry {
             }
         }
         results.put(c, st);
+    }
+
+    /**
+     * Method sets the stop state for all other tests
+     *
+     * @param clazz Class which failure stops the execution
+     */
+    public static void setBreakPoint(Class clazz) {
+        stopExecution = true;
+        breakingClass = clazz;
+    }
+
+    /**
+     * Check if execution should be stopped.
+     *
+     * @return true if execution is stopped, false otherwise
+     */
+    public static boolean stoppedExecution() {
+        return stopExecution;
+    }
+
+    /**
+     * Get the test class which stopped execution
+     *
+     * @return class which failed
+     */
+    public static Class getBreakingClass() {
+        return breakingClass;
     }
 }

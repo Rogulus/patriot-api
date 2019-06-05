@@ -42,7 +42,6 @@ public interface Controller {
      *
      * @param device   the device
      * @param networks the networks
-     * @param networks the networks
      */
     void connectDeviceToNetwork(Device device, List<Network> networks);
 
@@ -93,10 +92,10 @@ public interface Controller {
 
     /**
      * Deploys device to network and set monitoring attributes to container.
-     * @param device
-     * @param tag
-     * @param monitoringIP
-     * @param monitoringPort
+     * @param device the device
+     * @param tag tag to be set
+     * @param monitoringIP ip address for monitoring
+     * @param monitoringPort port for monitoring
      */
     void deployDevice(Device device, String tag, String monitoringIP, int monitoringPort);
 
@@ -118,41 +117,41 @@ public interface Controller {
 
     /**
      * Returns network ip address of default gw.
-     * @param device
-     * @return
+     * @param device device to be searched
+     * @return address of gateway
      */
     String findGWNetworkIPAddress(Device device);
 
     /**
      * Returns ip address of default gw interface.
-     * @param device
-     * @return
+     * @param device device which address is searched
+     * @return string representation of address
      */
     String findGWIPAddress(Device device);
 
     /**
      * Returns network mask of default gw interface.
-     * @param device
-     * @return
+     * @param device device which mask will be returned
+     * @return network mask of device
      */
     Integer findGWMask(Device device);
 
     /**
      * Returns String identifier of controller, Docker/Rocket/VM, ...
-     * @return
+     * @return identifier
      */
     String getIdentifier();
 
     /**
      * Executes command in device.
-     * @param device
-     * @param command
+     * @param device where command will be executed
+     * @param command which will be executed
      */
     void executeCommand(Device device, String command);
 
     /**
      * Starts device.
-     * @param device
+     * @param device device to start
      */
     void startDevice(Device device);
 }

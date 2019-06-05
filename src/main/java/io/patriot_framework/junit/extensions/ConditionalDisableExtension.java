@@ -19,24 +19,23 @@ package io.patriot_framework.junit.extensions;
 import org.junit.jupiter.api.extension.ConditionEvaluationResult;
 import org.junit.jupiter.api.extension.ExecutionCondition;
 import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 
 import java.lang.reflect.AnnotatedElement;
 import java.util.Optional;
 
 import static org.junit.platform.commons.util.AnnotationUtils.findAnnotation;
 
-
-public class ConditionalDisableExtension implements ExecutionCondition
-{
-    SummaryGeneratingListener listener;
-
+/**
+ * Extension implements the ExecutionCondition base class and enables test
+ * skip on failure of any dependent tests (by annotation)
+ */
+public class ConditionalDisableExtension implements ExecutionCondition {
     @Override
     public ConditionEvaluationResult evaluateExecutionCondition(ExtensionContext context) {
         Optional<AnnotatedElement> annotation = context.getElement();
         Optional<DisableByState> disabledCondition = findAnnotation(annotation, DisableByState.class);
-        if (!disabledCondition.isPresent()) {
-            return ConditionEvaluationResult.enabled("Not annotaed");
+        if (disabledCondition.isEmpty()) {
+            return ConditionEvaluationResult.enabled("Not annotated");
         }
 
         DisableByState cond = disabledCondition.get();
@@ -45,9 +44,5 @@ public class ConditionalDisableExtension implements ExecutionCondition
         }
 
         return ConditionEvaluationResult.enabled("Condition was not met");
-
-
-
-
     }
 }
