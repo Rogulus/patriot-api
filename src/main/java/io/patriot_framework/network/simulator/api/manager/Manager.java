@@ -402,7 +402,7 @@ public class Manager {
 
         for (int i = 0; i < topologySize; i++) {
             TopologyNetwork network = networks.get(i);
-            for (int y = 0; y < topologySize; y++) {
+            for (int y = 0; y < network.getCalcRoutes().size(); y++) {
                 if (i == y) continue;
                 CalcRoute calcRoute = network.getCalcRoutes().get(y);
                 if (calcRoute.getCost() == 1) {
@@ -541,10 +541,12 @@ public class Manager {
      * @param network network where device will be connected
      * @param calculatedTopology the topology which of network
      * @param tag tag of device
+     * @param envVars environment variables passed to the container
      */
-    public void deployDeviceToNetwork(Device device, TopologyNetwork network, Topology calculatedTopology, String tag) {
+    public void deployDeviceToNetwork(Device device, TopologyNetwork network, Topology calculatedTopology, String tag, List<String> envVars) {
         ArrayList<TopologyNetwork> networks = calculatedTopology.getNetworks();
-        deployToNetwork(device, tag, network);
+        calculatedTopology.addDevice(device);
+        deployToNetwork(device, tag, network, envVars);
         int internet = 0, sourceNet = 0;
         for (int i = 0; i < networks.size(); i++) {
             if (networks.get(i).getInternet()) {
@@ -569,10 +571,11 @@ public class Manager {
      * @param device
      * @param tag
      * @param network
+     * @param envVars
      */
-    private void deployToNetwork(Device device, String tag, TopologyNetwork network) {
+    private void deployToNetwork(Device device, String tag, TopologyNetwork network, List<String> envVars) {
         Controller deviceController = findController(device);
-        deviceController.deployDevice(device, tag, monitoringAddr, monitoringPort);
+        deviceController.deployDevice(device, tag, monitoringAddr, monitoringPort, envVars);
         deviceController.connectDeviceToNetwork(device, network);
         device.getConnectedNetworks().add(network);
     }

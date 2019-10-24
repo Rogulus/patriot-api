@@ -34,7 +34,7 @@ public class ConditionalDisableExtension implements ExecutionCondition {
     public ConditionEvaluationResult evaluateExecutionCondition(ExtensionContext context) {
         Optional<AnnotatedElement> annotation = context.getElement();
         Optional<DisableByState> disabledCondition = findAnnotation(annotation, DisableByState.class);
-        if (disabledCondition.isEmpty()) {
+        if (!disabledCondition.isPresent()) {
             return ConditionEvaluationResult.enabled("Not annotated");
         }
 

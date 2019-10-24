@@ -21,8 +21,10 @@ import io.patriot_framework.network.simulator.api.model.devices.router.Router;
 import io.patriot_framework.network.simulator.api.model.network.TopologyNetwork;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 
 /**
@@ -39,14 +41,21 @@ public class Topology {
      */
     private ArrayList<TopologyNetwork> networks;
 
-    private List<Device> devices = new ArrayList<>();
+    private Set<Device> devices = new HashSet<>();
 
-    public List<Device> getDevices() {
+    public Set<Device> getDevices() {
         return devices;
     }
 
-    public void setDevices(List<Device> devices) {
+    public void setDevices(Set<Device> devices) {
         this.devices = devices;
+    }
+
+    public void addDevice(Device d) {
+        if (devices.contains(d)) {
+            return;
+        }
+        devices.add(d);
     }
 
     /**

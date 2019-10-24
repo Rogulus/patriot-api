@@ -20,17 +20,19 @@ import io.patriot_framework.network.simulator.api.model.devices.Device;
 import io.patriot_framework.network.simulator.api.model.network.Network;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Application can represent data generator or every container connected to topology.
  */
 public class Application implements Device {
-
-
     private String name;
     private String ipAddress;
     private List<Network> connectedNetworks = new ArrayList<>();
+    private Map<String, String> ipAddresses = new HashMap<>();
     private String creator;
     private int managementPort = 0;
     public static final int DEFAULT_PORT = 8090;
@@ -101,5 +103,34 @@ public class Application implements Device {
     @Override
     public String getCreator() {
         return creator;
+    }
+
+    @Override
+    public String getAddressForNetwork(String networkName) {
+        return ipAddresses.get(networkName);
+    }
+
+    @Override
+    public boolean addAddressForNetwork(String address, String networkName) {
+        if (ipAddresses.containsKey(networkName)) {
+            return false;
+        }
+
+        ipAddresses.put(networkName, address);
+        return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Application that = (Application) o;
+        return Objects.equals(name, that.name) &&
+                creator.equals(that.creator);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, creator);
     }
 }

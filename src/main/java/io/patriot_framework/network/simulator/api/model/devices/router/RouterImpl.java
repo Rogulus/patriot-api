@@ -203,6 +203,16 @@ public class RouterImpl implements Router {
     }
 
     @Override
+    public String getAddressForNetwork(String networkName) {
+        return null;
+    }
+
+    @Override
+    public boolean addAddressForNetwork(String address, String networkName) {
+        return false;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

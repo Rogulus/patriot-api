@@ -55,6 +55,16 @@ public interface Device extends EnvironmentPart {
     List<Network> getConnectedNetworks();
 
     /**
+     *
+     */
+    String getAddressForNetwork(String networkName);
+
+    /**
+     *
+     */
+    boolean addAddressForNetwork(String address, String networkName);
+
+    /**
      * Gets management port.
      *
      * @return the management port
