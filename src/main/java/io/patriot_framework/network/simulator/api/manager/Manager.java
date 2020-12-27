@@ -474,10 +474,13 @@ public class Manager {
      * @return
      */
     private Controller findController(EnvironmentPart environmentPart) {
-        for (Controller controller : controllers) {
-            if (environmentPart.getCreator().equals(controller.getIdentifier())) {
-                LOGGER.debug("Found right controller for: " + environmentPart.getCreator());
-                return controller;
+        for (Controller masterController : controllers) {
+            Collection<Controller> controllers = masterController.getSubControllers().orElse(Collections.singleton(masterController));
+            for (Controller controller : controllers) {
+                if (environmentPart.getCreator().equals(controller.getIdentifier())) {
+                    LOGGER.debug("Found right controller for: " + environmentPart.getCreator());
+                    return controller;
+                }
             }
         }
         LOGGER.error("Cannot find matching creator!");

@@ -20,7 +20,9 @@ import io.patriot_framework.network.simulator.api.model.devices.Device;
 import io.patriot_framework.network.simulator.api.model.network.Network;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -157,7 +159,7 @@ public interface Controller {
      * Returns String identifier of controller, Docker/Rocket/VM, ...
      * @return identifier
      */
-    String getIdentifier();
+    Object getIdentifier();
 
     /**
      * Executes command in device.
@@ -165,6 +167,13 @@ public interface Controller {
      * @param command which will be executed
      */
     void executeCommand(Device device, String command);
+
+    /**
+     * If the controller consists of multiple controllers, return them
+     */
+    default Optional<Collection<Controller>> getSubControllers() {
+        return Optional.empty();
+    }
 
     /**
      * Starts device.
