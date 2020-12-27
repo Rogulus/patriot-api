@@ -40,7 +40,7 @@ public class RouterBuilder {
     /**
      * Creator of object (docker, VM, ...)
      */
-    private String creator;
+    private Object creator;
 
     private Boolean corner = false;
 
@@ -64,7 +64,7 @@ public class RouterBuilder {
         return this;
     }
 
-    public RouterBuilder withCreator(String creator) {
+    public RouterBuilder withCreator(Object creator) {
         this.creator = creator;
         return this;
     }

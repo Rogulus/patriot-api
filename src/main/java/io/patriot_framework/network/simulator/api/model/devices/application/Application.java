@@ -33,7 +33,7 @@ public class Application implements Device {
     private String ipAddress;
     private List<Network> connectedNetworks = new ArrayList<>();
     private Map<String, String> ipAddresses = new HashMap<>();
-    private String creator;
+    private Object creator;
     private int managementPort = 0;
     public static final int DEFAULT_PORT = 8090;
 
@@ -63,7 +63,7 @@ public class Application implements Device {
      * @param name    the name
      * @param creator the creator
      */
-    public Application(String name, String creator) {
+    public Application(String name, Object creator) {
         this.name = name;
         this.creator = creator;
     }
@@ -101,7 +101,7 @@ public class Application implements Device {
     }
 
     @Override
-    public String getCreator() {
+    public Object getCreator() {
         return creator;
     }
 

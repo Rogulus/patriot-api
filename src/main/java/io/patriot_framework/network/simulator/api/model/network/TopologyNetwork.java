@@ -33,7 +33,7 @@ public class TopologyNetwork extends Network {
     @JsonIgnore
     private Boolean internet = false;
     @JsonIgnore
-    private String creator;
+    private Object creator;
     @JsonIgnore
     private String internetInterfaceIP = null;
 
@@ -90,12 +90,12 @@ public class TopologyNetwork extends Network {
     }
 
 
-    public void setCreator(String creator) {
+    public void setCreator(Object creator) {
         this.creator = creator;
     }
 
     @Override
-    public String getCreator() {
+    public Object getCreator() {
         return creator;
     }
 

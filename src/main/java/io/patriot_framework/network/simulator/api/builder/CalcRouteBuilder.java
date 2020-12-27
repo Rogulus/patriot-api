@@ -161,7 +161,7 @@ public class CalcRouteBuilder {
     private Integer findNetworkByName(String name) {
         ArrayList<TopologyNetwork> topologyNetworks = topologyBuilder.getTopology().getNetworks();
         for (int i = 0; i < topologyNetworks.size(); i++) {
-            if (topologyNetworks.get(i).getName() == name) {
+            if (topologyNetworks.get(i).getName().equals(name)) {
                 return i;
             }
         }

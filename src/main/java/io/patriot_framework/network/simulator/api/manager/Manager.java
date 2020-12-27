@@ -34,6 +34,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -378,7 +380,7 @@ public class Manager {
      * @param creator creating object
      * @return
      */
-    private Device findDeviceWithCreator(Topology topology, String creator) {
+    private Device findDeviceWithCreator(Topology topology, Object creator) {
         for (Device device : topology.getRouters()) {
             if (device.getCreator().equals(creator)) {
                 return device;
@@ -466,8 +468,8 @@ public class Manager {
     }
 
     /**
-     * Finds controller by string identifier. For 'Docker' will return Docker implementation of
-     * controller.
+     * Finds controller by an object identifier. If the controller consists of multiple other controllers, it will check with them too.
+     * For 'Docker' will return Docker implementation of controller.
      * @param environmentPart part of creating environment like network, router, ...
      * @return
      */

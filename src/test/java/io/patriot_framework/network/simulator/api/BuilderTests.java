@@ -76,6 +76,31 @@ public class BuilderTests {
     }
 
     @Test
+    public void networkBuilderObjectTest() {
+        CalculatedRouteList calcRoutes = new CalculatedRouteList();
+        NextHop nextHop = new NextHop(new RouterImpl("TestRt", 'x'), 1);
+        CalcRoute calcRoute = new CalcRoute(nextHop, 10);
+        calcRoutes.add(calcRoute);
+
+        TopologyNetwork topologyNetwork = new TopologyNetwork();
+        topologyNetwork.setCreator('x');
+        topologyNetwork.setMask(24);
+        topologyNetwork.setIPAddress("192.168.1.0");
+        topologyNetwork.setInternet(true);
+        topologyNetwork.setName("TestNet");
+        topologyNetwork.setCalcRoutes(calcRoutes);
+
+        TopologyNetwork builderNetwork = new NetworkBuilder("TestNet")
+                .withCalcRoutes(calcRoutes)
+                .withCreator('x')
+                .withInternet(true)
+                .withIP("192.168.1.0")
+                .withMask(24)
+                .build();
+        Assertions.assertEquals(builderNetwork, topologyNetwork);
+    }
+
+    @Test
     public void routerBuilderTest() {
         RouterImpl rtImpl = new RouterImpl("TestRt", "Docker", true);
         Router buildedRouter = new RouterBuilder("TestRt")
@@ -83,6 +108,17 @@ public class BuilderTests {
                 .withCreator("Docker")
                 .build();
         Assertions.assertTrue(rtImpl.equals(buildedRouter));
+
+    }
+
+    @Test
+    public void routerBuilderObjectTest() {
+        RouterImpl rtImpl = new RouterImpl("TestRt", 5, true);
+        Router buildedRouter = new RouterBuilder("TestRt")
+                .withCorner(true)
+                .withCreator(5)
+                .build();
+        Assertions.assertEquals(buildedRouter, rtImpl);
 
     }
 
@@ -117,6 +153,42 @@ public class BuilderTests {
                     .withCost(1)
                     .addRoute()
                     .buildRoutes()
+                .build();
+        Assertions.assertTrue(builderTopology.equals(topology));
+    }
+
+    @Test
+    public void topologyBuilderObjectTest() {
+        RouterImpl rtImpl = new RouterImpl("TestRt", 15, true);
+        Topology topology = new Topology(2);
+        topology.setRouters(Arrays.asList(rtImpl));
+        topology.setNetworks(prepareNetwork(rtImpl));
+
+        Topology builderTopology = new TopologyBuilder(2)
+                .withCreator("Docker")
+                .withRouters()
+                .withCorner(true)
+                .withName("TestRt")
+                .withCreator(15)
+                .createRouter()
+                .addRouters()
+                .withNetwork("TestNet1")
+                .withMask(24)
+                .withIP("192.168.1.0")
+                .withInternet(true)
+                .create()
+                .withNetwork("TestNet2")
+                .withMask(24)
+                .withIP("192.168.2.0")
+                .withInternet(false)
+                .create()
+                .withRoutes()
+                .viaRouter("TestRt")
+                .withDestNetwork(1)
+                .withSourceNetwork(0)
+                .withCost(1)
+                .addRoute()
+                .buildRoutes()
                 .build();
         Assertions.assertTrue(builderTopology.equals(topology));
     }

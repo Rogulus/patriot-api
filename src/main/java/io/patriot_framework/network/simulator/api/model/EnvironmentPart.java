@@ -18,8 +18,8 @@ package io.patriot_framework.network.simulator.api.model;
 
 public interface EnvironmentPart {
     /**
-     * Returns creator identifier of env part.
+     * Returns creator identifier, can be any object, of env part.
      * @return creator of this object
      */
-    String getCreator();
+    Object getCreator();
 }

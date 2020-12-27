@@ -29,7 +29,7 @@ public class NetworkBuilder {
     /**
      * Creator of network (docker, VM, ...)
      */
-    private String creator;
+    private Object creator;
     private String ipAddress;
     private String name;
     private int mask = 0;
@@ -100,7 +100,7 @@ public class NetworkBuilder {
         return this;
     }
 
-    public NetworkBuilder withCreator(String creator) {
+    public NetworkBuilder withCreator(Object creator) {
         this.creator = creator;
         return this;
     }

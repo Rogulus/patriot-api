@@ -31,7 +31,7 @@ public class RouterImpl implements Router {
     private List<Network> connectedTopologyNetworks = new ArrayList<>();
     private String managementIP;
     private Integer managementPort = 0;
-    private String creator;
+    private Object creator;
     private boolean corner = false;
 
 
@@ -48,7 +48,7 @@ public class RouterImpl implements Router {
         connectedTopologyNetworks = new ArrayList<>();
     }
 
-    public RouterImpl(String name, String creator) {
+    public RouterImpl(String name, Object creator) {
         this.creator = creator;
         this.name = name;
     }
@@ -64,7 +64,7 @@ public class RouterImpl implements Router {
         this.networkInterfaces = networkInterfaces;
     }
 
-    public RouterImpl(String name, String creator, boolean corner) {
+    public RouterImpl(String name, Object creator, boolean corner) {
         this.name = name;
         this.creator = creator;
         this.corner = corner;
@@ -194,7 +194,7 @@ public class RouterImpl implements Router {
     }
 
     @Override
-    public String getCreator() {
+    public Object getCreator() {
         return creator;
     }
 

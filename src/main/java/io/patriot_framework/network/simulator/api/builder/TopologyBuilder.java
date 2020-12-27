@@ -26,12 +26,12 @@ public class TopologyBuilder {
      * The Topology.
      */
     private Topology topology;
-    private String currentCreator;
+    private Object currentCreator;
 
-    public String getCurrentCreator() {
+    public Object getCurrentCreator() {
         return currentCreator;
     }
-    public TopologyBuilder withCreator(String creator) {
+    public TopologyBuilder withCreator(Object creator) {
         currentCreator = creator;
         return this;
     }
@@ -53,6 +53,10 @@ public class TopologyBuilder {
      */
     public TopologyBuilder(int networkCount) {
         topology = new Topology(networkCount);
+    }
+
+    public TopologyBuilder(Topology topology) {
+        this.topology = topology;
     }
 
     /**
