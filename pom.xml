@@ -133,7 +133,7 @@
       <org.codehouse.mojo.version>1.6.0</org.codehouse.mojo.version>
       <org.args4j.version>2.33</org.args4j.version>
       <org.java-docker.version>3.1.0-rc-3</org.java-docker.version>
-      <com.fasterxml.jackson.core.version>2.8.11.1</com.fasterxml.jackson.core.version>
+      <com.fasterxml.jackson.core.version>2.12.7.1</com.fasterxml.jackson.core.version>
       <com.github.jgonian.version>1.32</com.github.jgonian.version>
       <gpg-plugin-version>1.6</gpg-plugin-version>
       <release-plugin-version>2.5.3</release-plugin-version>
