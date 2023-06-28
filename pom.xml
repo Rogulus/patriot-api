@@ -20,7 +20,7 @@
 
    <groupId>io.patriot-framework</groupId>
    <artifactId>patriot-api</artifactId>
-   <version>2.0.1-SNAPSHOT</version>
+   <version>5.0.0-SNAPSHOT</version>
 
    <name>Patriot topologyNetwork simulator api</name>
    <description>
@@ -114,6 +114,16 @@
          </roles>
          <timezone>Europe/Prague</timezone>
       </developer>
+      <developer>
+         <id>mstastny</id>
+         <email>mstastny@redhat.com</email>
+         <organization>Red Hat</organization>
+         <name>Marek Šťastný</name>
+         <roles>
+            <role>Developer</role>
+         </roles>
+         <timezone>Europe/Prague</timezone>
+      </developer>
    </developers>
    <distributionManagement>
       <snapshotRepository>
@@ -126,17 +136,19 @@
       </repository>
    </distributionManagement>
    <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
       <org.junit.platform.version>1.5.2</org.junit.platform.version>
-      <org.junit.jupiter.version>5.5.2</org.junit.jupiter.version>
-      <maven-surefire-plugin.version>3.0.0-M1</maven-surefire-plugin.version>
-      <org.slf4j.version>1.7.5</org.slf4j.version>
-      <org.codehouse.mojo.version>1.6.0</org.codehouse.mojo.version>
+      <org.junit.jupiter.version>5.9.3</org.junit.jupiter.version>
+      <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+      <org.slf4j.version>2.0.7</org.slf4j.version>
+      <org.codehouse.mojo.version>3.1.0</org.codehouse.mojo.version>
       <org.args4j.version>2.33</org.args4j.version>
-      <org.java-docker.version>3.1.0-rc-3</org.java-docker.version>
-      <com.fasterxml.jackson.core.version>2.14.1</com.fasterxml.jackson.core.version>
+      <com.fasterxml.jackson.core.version>2.15.2</com.fasterxml.jackson.core.version>
       <com.github.jgonian.version>1.32</com.github.jgonian.version>
-      <gpg-plugin-version>1.6</gpg-plugin-version>
-      <release-plugin-version>2.5.3</release-plugin-version>
+      <gpg-plugin-version>3.1.0</gpg-plugin-version>
+      <release-plugin-version>3.0.1</release-plugin-version>
+      <com.sun.xml.bind.version>4.0.3</com.sun.xml.bind.version>
    </properties>
 
    <build>
@@ -144,12 +156,13 @@
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.7.0</version>
+            <version>3.11.0</version>
             <configuration>
                <release>17</release>
             </configuration>
          </plugin>
          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>${maven-surefire-plugin.version}</version>
          </plugin>
@@ -171,7 +184,9 @@
             </configuration>
          </plugin>
          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.6.0</version>
             <configuration>
                <descriptorRefs>
                   <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -196,11 +211,12 @@
          </plugin>
       </plugins>
    </build>
+
    <dependencies>
       <dependency>
          <groupId>io.patriot-framework</groupId>
          <artifactId>generator</artifactId>
-         <version>2.0.1-SNAPSHOT</version>
+         <version>5.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>
          <groupId>org.junit.jupiter</groupId>
@@ -235,17 +251,17 @@
       <dependency>
          <groupId>javax.xml.bind</groupId>
          <artifactId>jaxb-api</artifactId>
-         <version>2.2.11</version>
+         <version>2.3.1</version>
       </dependency>
       <dependency>
          <groupId>com.sun.xml.bind</groupId>
          <artifactId>jaxb-core</artifactId>
-         <version>4.0.1</version>
+         <version>${com.sun.xml.bind.version}</version>
       </dependency>
       <dependency>
          <groupId>com.sun.xml.bind</groupId>
          <artifactId>jaxb-impl</artifactId>
-         <version>4.0.1</version>
+         <version>${com.sun.xml.bind.version}</version>
       </dependency>
       <dependency>
          <groupId>javax.activation</groupId>
@@ -255,14 +271,13 @@
       <dependency>
          <groupId>org.junit.platform</groupId>
          <artifactId>junit-platform-launcher</artifactId>
-         <version>1.2.0</version>
+         <version>1.9.3</version>
       </dependency>
       <dependency>
          <groupId>org.scannotation</groupId>
          <artifactId>scannotation</artifactId>
          <version>1.0.3</version>
       </dependency>
-
    </dependencies>
 
    <profiles>
